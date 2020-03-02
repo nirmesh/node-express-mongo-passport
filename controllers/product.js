@@ -24,13 +24,6 @@ exports.product_create = function (req, res) {
 exports.product_details = function (req, res) {
     Product.findById(req.params.id, function (err, product) {
         if (err) return next(err);
-        // if (err) {
-        //     // const error = new Error('id does not exist ')
-        //     // error.httpStatusCode = 400
-        //     // return next(error)
-        //     throw new Error('id does not exist ');
-
-        // }
         res.send(product);
     })
 };
@@ -46,5 +39,11 @@ exports.product_delete = function (req, res) {
     Product.findByIdAndRemove(req.params.id, function (err) {
         if (err) return next(err);
         res.send('Deleted successfully!');
+    })
+};
+exports.product_get = function (req, res,next) {
+    Product.find(function (err,product) {
+        if (err) return next(err);
+        res.send(product);
     })
 };

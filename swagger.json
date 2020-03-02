@@ -1,153 +1,394 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "version": "1.0.0",
-      "title": "Dell Emc Node.js product Application API",
-      "description": "Dell Emc Node.js product Application API",
-      "license": {
-        "name": "MIT",
-        "url": "https://opensource.org/licenses/MIT"
-      }
-    },
-    "host": "localhost:1234",
-    "tags": [
-      {
-        "name": "Products",
-        "description": "API for users in the system"
-      }
-    ],
-    "schemes": [
-      "http"
-    ],
-    "consumes": [
-      "application/json"
-    ],
-    "produces": [
-      "application/json"
-    ],
-    "paths": {
-      "/products": {
-        "post": {
-          "tags": [
-            "Products"
-          ],
-          "description": "Create new product in system",
-          "parameters": [
-            {
-              "name": "product",
-              "in": "body",
-              "description": "Product that we want to create",
-              "schema": {
-                "$ref": "#/definitions/Product"
-              }
-            }
-          ],
-          "produces": [
-            "application/json"
-          ],
-          "responses": {
-            "200": {
-              "description": "New product is created",
-              "schema": {
-                "$ref": "#/definitions/Product"
-              }
-            }
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "Dell Emc Node API Playground",
+    "contact": {}
+  },
+  "host": "localhost:1234",
+  "basePath": "/",
+  "securityDefinitions": {},
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/users/login": {
+      "post": {
+        "summary": "localhost:1234/users/login",
+        "tags": [
+          "User"
+        ],
+        "operationId": "localhost:1234/users/login",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+       
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "",
+            "value":"application/json"
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": ""
           }
-        },
-        "get": {
-          "tags": [
-            "Products"
-          ],
-          "summary": "Get all products in system",
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "$ref": "#/definitions/Products"
-              }
-            }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
           }
         }
-      },
-      "/products/{productId}": {
+      }
+    },
+    "/products/create": {
+      "post": {
+        "summary": "localhost:1234/products/create",
+        "tags": [
+          "Product"
+        ],
+        "operationId": "localhost:1234/products/create",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "productId",
-            "in": "path",
+            "name": "Content-Type",
+            "in": "header",
             "required": true,
-            "description": "ID of product that we want to find",
+            "type": "string",
+            "description": "",
+            "value":"application/json"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
             "type": "string"
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": ""
           }
         ],
-        "get": {
-          "tags": [
-            "Products"
-          ],
-          "summary": "Get product with given ID",
-          "responses": {
-            "200": {
-              "description": "Product is found",
-              "schema": {
-                "$ref": "#/definitions/Product"
-              }
-            }
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
           }
         },
-        "delete": {
-          "summary": "Delete product with given ID",
-          "tags": [
-            "Products"
-          ],
-          "responses": {
-            "200": {
-              "description": "Product is deleted",
-              "schema": {
-                "$ref": "#/definitions/Product"
-              }
-            }
+        "security": []
+      }
+    },
+    "/products/get": {
+      "get": {
+        "summary": "localhost:1234/products/get",
+        "tags": [
+          "Product"
+        ],
+        "operationId": "localhost:1234/products/get",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "",
+            "value":"application/json"
           }
-        },
-        "put": {
-          "summary": "Update product with give ID",
-          "tags": [
-            "Products"
-          ],
-          "parameters": [
-            {
-              "name": "product",
-              "in": "body",
-              "description": "Product with new values of properties",
-              "schema": {
-                "$ref": "#/definitions/Product"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Product is updated",
-              "schema": {
-                "$ref": "#/definitions/Product"
-              }
-            }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
           }
         }
       }
     },
-    "definitions": {
-      "Product": {
-        "required": [
-          "name",
-          "price"
+    "/products/{id}/delete": {
+      "delete": {
+        "summary": "localhost:1234/products/{id}/delete",
+        "tags": [
+          "Product"
         ],
-        "properties": {
-          "name": {
+        "operationId": "localhost:1234/products/{id}/delete",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
             "type": "string"
           },
-          "price": {
-            "type": "integer"
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "",
+            "value":"application/json"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Product Id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/products/{id}/update": {
+      "put": {
+        "summary": "localhost:1234/products/{id}/update",
+        "tags": [
+          "Product"
+        ],
+        "operationId": "localhost:1234/products/{id}/update",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "",
+            "value":"application/json"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Product Id"
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/parallel-execution": {
+      "get": {
+        "summary": "localhost:1234/parallel-execution",
+        "tags": [
+          "Parallel execution"
+        ],
+        "operationId": "parallel-execution",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/external-call": {
+      "get": {
+        "summary": "localhost:1234/external-call",
+        "tags": [
+          "External call"
+        ],
+        "operationId": "external-call",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/photos": {
+      "get": {
+        "summary": "localhost:1234/photos",
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "photos",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
           }
         }
       }
     }
-  }
-  
+  },
+  "definitions": {
+    "localhost:1234/users/loginrequest": {
+      "title": "login request",
+      "example": {
+        "user": {
+          "email": "nirmesh44@gmail.com",
+          "password": "test"
+        }
+      },
+      "type": "object",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/User"
+        }
+      },
+      "required": [
+        "user"
+      ]
+    },
+    "User": {
+      "title": "User",
+      "example": {
+        "email": "nirmesh44@gmail.com",
+        "password": "test"
+      },
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "email",
+        "password"
+      ]
+    },
+    "localhost:1234/products/create": {
+      "title": "product create request",
+      "example": {
+        "name": "rna",
+        "price": "12"
+      },
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "price"
+      ]
+    },
+    "localhost:1234/products/{id}/update": {
+      "title": "product update request",
+      "example": {
+        "name": "philips",
+        "price": "100"
+      },
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "price"
+      ]
+    }
+  },
+  "tags": [
+    {
+      "name": "Product",
+      "description": ""
+    }
+  ]
+}
