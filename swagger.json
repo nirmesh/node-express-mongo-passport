@@ -17,6 +17,15 @@
   "produces": [
     "application/json"
   ],
+  "components": {
+      "securitySchemes": {
+        "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+      }
+    },
   "paths": {
     "/users/login": {
       "post": {
@@ -46,7 +55,10 @@
             "name": "Body",
             "in": "body",
             "required": true,
-            "description": ""
+            "description": "",
+            "schema":{
+              "$ref":"#/definitions/userLogin"
+           }
           }
         ],
         "responses": {
@@ -73,6 +85,13 @@
         ],
         "parameters": [
           {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcm1lc2g0NEBnbWFpbC5jb20iLCJpZCI6IjVlMDVlMzJlOGE3ZGI0N2EzZDEzODhlNiIsImV4cCI6MTU4ODMyMjQ3NSwiaWF0IjoxNTgzMTM4NDc1fQ.UraxtSDk20HysmrYfuaI8mAUaPAhCKD8T2ybZpLTyoA",
+            "type": "string"
+          },
+          {
             "name": "Content-Type",
             "in": "header",
             "required": true,
@@ -81,17 +100,13 @@
             "value":"application/json"
           },
           {
-            "name": "Authorization",
-            "in": "header",
-            "required": false,
-            "default": "Bearer {token}",
-            "type": "string"
-          },
-          {
             "name": "Body",
             "in": "body",
             "required": true,
-            "description": ""
+            "description": "",
+            "schema":{
+              "$ref":"#/definitions/productCreate"
+           }
           }
         ],
         "responses": {
@@ -99,8 +114,7 @@
             "description": "",
             "headers": {}
           }
-        },
-        "security": []
+        }
       }
     },
     "/products/get": {
@@ -161,7 +175,7 @@
             "name": "Authorization",
             "in": "header",
             "required": false,
-            "default": "Bearer {token}",
+            "default": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcm1lc2g0NEBnbWFpbC5jb20iLCJpZCI6IjVlMDVlMzJlOGE3ZGI0N2EzZDEzODhlNiIsImV4cCI6MTU4ODMyMjQ3NSwiaWF0IjoxNTgzMTM4NDc1fQ.UraxtSDk20HysmrYfuaI8mAUaPAhCKD8T2ybZpLTyoA",
             "type": "string"
           },
           {
@@ -206,7 +220,7 @@
             "name": "Authorization",
             "in": "header",
             "required": false,
-            "default": "Bearer {token}",
+            "default": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcm1lc2g0NEBnbWFpbC5jb20iLCJpZCI6IjVlMDVlMzJlOGE3ZGI0N2EzZDEzODhlNiIsImV4cCI6MTU4ODMyMjQ3NSwiaWF0IjoxNTgzMTM4NDc1fQ.UraxtSDk20HysmrYfuaI8mAUaPAhCKD8T2ybZpLTyoA",
             "type": "string"
           },
           {
@@ -227,7 +241,10 @@
             "name": "Body",
             "in": "body",
             "required": true,
-            "description": ""
+            "description": "",
+            "schema":{
+              "$ref":"#/definitions/productUpdate"
+           }
           }
         ],
         "responses": {
@@ -306,7 +323,7 @@
     }
   },
   "definitions": {
-    "localhost:1234/users/loginrequest": {
+    "userLogin": {
       "title": "login request",
       "example": {
         "user": {
@@ -344,7 +361,7 @@
         "password"
       ]
     },
-    "localhost:1234/products/create": {
+    "productCreate": {
       "title": "product create request",
       "example": {
         "name": "rna",
@@ -356,7 +373,7 @@
           "type": "string"
         },
         "price": {
-          "type": "string"
+          "type": "number"
         }
       },
       "required": [
@@ -364,7 +381,7 @@
         "price"
       ]
     },
-    "localhost:1234/products/{id}/update": {
+    "productUpdate": {
       "title": "product update request",
       "example": {
         "name": "philips",
@@ -376,7 +393,7 @@
           "type": "string"
         },
         "price": {
-          "type": "string"
+          "type": "number"
         }
       },
       "required": [
